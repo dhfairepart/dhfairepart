@@ -1701,13 +1701,13 @@ function updatePreview() {
   const cRue = document.getElementById('civil-rue').value || '';
   const cCp = document.getElementById('civil-cp').value || '';
   const cVille = document.getElementById('civil-ville').value || '';
-  const cA = [cRue, [cCp, cVille].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+  const cA = [cRue, [cCp, cVille].filter(Boolean).join(' ')].filter(Boolean).join('<br>');
   const rH = formatHeure(document.getElementById('reception-heure').value);
   const sN = document.getElementById('salle-nom').value || (i18n[currentLang] && i18n[currentLang]['preview.reception']) || 'RÉCEPTION';
   const rRue = document.getElementById('reception-rue').value || '';
   const rCp = document.getElementById('reception-cp').value || '';
   const rVille = document.getElementById('reception-ville').value || '';
-  const rA = [rRue, [rCp, rVille].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+  const rA = [rRue, [rCp, rVille].filter(Boolean).join(' ')].filter(Boolean).join('<br>');
   const basmala = document.getElementById('basmala').checked;
 
   // Basmala
@@ -1746,12 +1746,12 @@ function updatePreview() {
   // Civil
   document.getElementById('prev-civil-heure').textContent = cH;
   document.getElementById('prev-civil-lieu').textContent = cL.toUpperCase();
-  document.getElementById('prev-civil-adresse').textContent = cA;
+  document.getElementById('prev-civil-adresse').innerHTML = cA;
 
   // Réception
   document.getElementById('prev-rec-heure').textContent = rH;
   document.getElementById('prev-salle').textContent = sN.toUpperCase();
-  document.getElementById('prev-rec-adresse').textContent = rA;
+  document.getElementById('prev-rec-adresse').innerHTML = rA;
 }
 
 function applyFreeText() {
