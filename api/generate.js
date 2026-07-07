@@ -14,20 +14,22 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${process.env.OPENAI_KEY}`
       },
       body: JSON.stringify({
-       model: gpt-image-2
+        model: 'gpt-image-2',
         prompt: prompt,
         n: 1,
-        size: '512x512',
-        quality: 'standard'
+        size: '1024x1024',
+        output_format: 'url'
       })
     });
     const data = await response.json();
     if (data.data && data.data[0]) {
-      return res.status(200).json({ url: data.data[0].url });
+      const img = data.data[0];
+      const url = img.url || `data:image/png;base64,${img.b64_json}`;
+      return res.status(200).json({ url });
     } else {
       return res.status(500).json({ error: data.error?.message || 'Erreur API' });
     }
   } catch (err) {
-    return res.status(500).json({ error: 'Erreur serveur' });
+    return res.status(500).json({ error: err.message });
   }
 }
