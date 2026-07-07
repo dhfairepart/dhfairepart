@@ -1170,7 +1170,7 @@
     </div>
 
     <div style="text-align:center">
-      <a href="#contact" class="btn-primary" style="display:inline-block;" data-i18n="config.order">Commander ce faire-part →</a>
+      <a href="#contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary" style="display:inline-block;cursor:pointer;" data-i18n="config.order">Commander ce faire-part →</a>
     </div>
   </div>
 
@@ -1877,12 +1877,12 @@ function updatePreview() {
   // Civil
   document.getElementById('prev-civil-heure').textContent = cH;
   document.getElementById('prev-civil-lieu').textContent = cL.toUpperCase();
-  document.getElementById('prev-civil-adresse').textContent = cA;
+  document.getElementById('prev-civil-adresse').innerHTML = cA;
 
   // Réception
   document.getElementById('prev-rec-heure').textContent = rH;
   document.getElementById('prev-salle').textContent = sN.toUpperCase();
-  document.getElementById('prev-rec-adresse').textContent = rA;
+  document.getElementById('prev-rec-adresse').innerHTML = rA;
 }
 
 function applyFreeText() {
