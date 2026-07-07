@@ -885,6 +885,7 @@
       opacity: 1;
       transform: translateY(0);
     }
+  @keyframes iaslide { from { left: -100%; } to { left: 100%; } }
   </style>
 </head>
 <body>
@@ -1121,6 +1122,53 @@
       </div>
     </div>
 
+    <!-- Nombre de pièces -->
+    <div class="config-field" style="margin-bottom:8px;">
+      <label class="config-label" data-i18n="config.qty">📦 Nombre de faire-parts</label>
+      <select id="config-qty" class="config-input" onchange="updatePreview()" style="cursor:pointer;">
+        <option value="50">50 pièces</option>
+        <option value="100">100 pièces</option>
+        <option value="150">150 pièces</option>
+        <option value="200">200 pièces</option>
+        <option value="250">250 pièces</option>
+        <option value="300">300 pièces</option>
+        <option value="350">350 pièces</option>
+        <option value="400">400 pièces</option>
+        <option value="450">450 pièces</option>
+        <option value="500">500 pièces</option>
+        <option value="550">550 pièces</option>
+        <option value="600">600 pièces</option>
+        <option value="650">650 pièces</option>
+        <option value="700">700 pièces</option>
+        <option value="750">750 pièces</option>
+        <option value="800">800 pièces</option>
+        <option value="850">850 pièces</option>
+        <option value="900">900 pièces</option>
+        <option value="950">950 pièces</option>
+        <option value="1000">1000 pièces</option>
+        <option value="1050">1050 pièces</option>
+        <option value="1100">1100 pièces</option>
+        <option value="1150">1150 pièces</option>
+        <option value="1200">1200 pièces</option>
+        <option value="1250">1250 pièces</option>
+        <option value="1300">1300 pièces</option>
+        <option value="1350">1350 pièces</option>
+        <option value="1400">1400 pièces</option>
+        <option value="1450">1450 pièces</option>
+        <option value="1500">1500 pièces</option>
+        <option value="1550">1550 pièces</option>
+        <option value="1600">1600 pièces</option>
+        <option value="1650">1650 pièces</option>
+        <option value="1700">1700 pièces</option>
+        <option value="1750">1750 pièces</option>
+        <option value="1800">1800 pièces</option>
+        <option value="1850">1850 pièces</option>
+        <option value="1900">1900 pièces</option>
+        <option value="1950">1950 pièces</option>
+        <option value="2000">2000 pièces</option>
+      </select>
+    </div>
+
     <div style="text-align:center">
       <a href="#contact" class="btn-primary" style="display:inline-block;" data-i18n="config.order">Commander ce faire-part →</a>
     </div>
@@ -1194,40 +1242,45 @@
 <!-- GÉNÉRATEUR IA -->
 <section id="ia-generator" style="padding:100px 48px;background:var(--black-soft);text-align:center;">
   <div style="max-width:680px;margin:0 auto;">
-    <span class="section-eyebrow">Intelligence Artificielle</span>
-    <h2 class="section-title">Générez votre faire-part<br><em>avec l'IA</em></h2>
+    <span class="section-eyebrow" data-i18n="ia.eyebrow">Intelligence Artificielle</span>
+    <h2 class="section-title" data-i18n="ia.title">Générez votre faire-part<br><em>avec l'IA</em></h2>
     <div class="gold-divider"></div>
-    <p style="font-size:0.78rem;color:var(--white-dim);line-height:1.8;margin-bottom:32px;">Décrivez le faire-part de vos rêves ou choisissez un exemple ci-dessous.</p>
+    <p style="font-size:0.78rem;color:var(--white-dim);line-height:1.8;margin-bottom:32px;" data-i18n="ia.desc">Décrivez le faire-part de vos rêves ou choisissez un exemple ci-dessous.</p>
 
     <!-- Exemples de prompts -->
     <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:24px;">
-      <button onclick="setPrompt(this)" data-prompt="Faire-part de mariage élégant sur fond noir, motifs dorés et floraux, prénoms Yasmine & Ismaël en calligraphie dorée" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;text-align:left;">✦ Oriental doré</button>
-      <button onclick="setPrompt(this)" data-prompt="Faire-part romantique avec dentelle blanche sur fond ivoire, roses en aquarelle, prénoms en script élégant" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;text-align:left;">✦ Dentelle romantique</button>
-      <button onclick="setPrompt(this)" data-prompt="Faire-part luxueux style boîte coffret, velours bordeaux, dorures et sceaux dorés, très haut de gamme" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;text-align:left;">✦ Coffret luxe</button>
-      <button onclick="setPrompt(this)" data-prompt="Faire-part moderne minimaliste, fond blanc, typographie fine noire et or, lignes géométriques épurées" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;text-align:left;">✦ Minimaliste moderne</button>
-      <button onclick="setPrompt(this)" data-prompt="Faire-part avec motifs henné traditionnels, couleurs or et rouge, style oriental marocain" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;text-align:left;">✦ Henné traditionnel</button>
-      <button onclick="setPrompt(this)" data-prompt="Faire-part champêtre avec fleurs sauvages pressées, fond kraft, ficelle et cire à cacheter" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;text-align:left;">✦ Champêtre nature</button>
+      <button onclick="setPrompt(this)" data-prompt="Luxury wedding invitation flat lay on white silk fabric, watercolor blue floral arch illustration, handmade cotton paper texture with deckled edges, elegant serif typography, navy blue envelope with white crochet lace trim, professional product photography" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;" data-i18n="ia.p1">✦ Aquarelle florale</button>
+      <button onclick="setPrompt(this)" data-prompt="Premium wedding invitation set, acrylic transparent card with gold foil calligraphy text, paired with ivory envelope tied with dusty rose silk ribbon bow and dried flowers bouquet, gold wax seal with initials, flat lay on grey linen background, luxury stationery product photo" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;" data-i18n="ia.p2">✦ Acrylique & ruban</button>
+      <button onclick="setPrompt(this)" data-prompt="Elegant wedding invitation suite, pearlescent ivory folded card with gold foil botanical floral corners, brown silk ribbon tied around with dried gypsophila flowers and bronze wax seal with monogram initials, calendar save the date card included, held in hand against grey wall, luxury wedding stationery" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;" data-i18n="ia.p3">✦ Gypsophile & cire</button>
+      <button onclick="setPrompt(this)" data-prompt="Minimalist luxury wedding invitation, cream beige textured card with white wax seal, natural twine bow, dried baby breath flowers, calendar save the date design, arched vellum overlay card with delicate botanical border, flat lay on geometric white background, editorial product photography" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;" data-i18n="ia.p4">✦ Minimaliste ivoire</button>
+      <button onclick="setPrompt(this)" data-prompt="Opulent wedding invitation box set, deep burgundy velvet envelope with gold wax seal, ivory card with gold foil Arabic and French calligraphy, ornate gold arabesque border pattern, luxury Middle Eastern wedding stationery, dark moody background, professional flat lay photography" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;" data-i18n="ia.p5">✦ Arabesque dorée</button>
+      <button onclick="setPrompt(this)" data-prompt="Wedding invitation with handmade deckled edge paper, watercolor navy blue floral illustration, cotton paper texture, paired with navy envelope and white crochet lace border trim, elegant script font, romantic flat lay on white silk satin fabric, high end wedding stationery photography" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;" data-i18n="ia.p6">✦ Dentelle & marine</button>
     </div>
 
     <!-- Zone de texte + micro -->
     <div style="position:relative;margin-bottom:24px;">
-      <textarea id="ia-prompt" placeholder="Ex: Faire-part élégant avec motifs dorés, fond noir, prénoms Yasmine & Ismaël en calligraphie..." style="width:100%;min-height:120px;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.3);color:var(--white);font-family:var(--font-body);font-size:0.75rem;line-height:1.8;padding:16px 50px 16px 16px;resize:vertical;outline:none;box-sizing:border-box;"></textarea>
+      <textarea id="ia-prompt" data-i18n-placeholder="ia.textarea" placeholder="Ex: Faire-part élégant avec motifs dorés, fond noir, prénoms en calligraphie..." style="width:100%;min-height:120px;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.3);color:var(--white);font-family:var(--font-body);font-size:0.75rem;line-height:1.8;padding:16px 50px 16px 16px;resize:vertical;outline:none;box-sizing:border-box;"></textarea>
       <button id="mic-btn" onclick="startVoice()" title="Dicter votre description" style="position:absolute;right:12px;top:12px;background:none;border:1px solid rgba(201,168,76,0.3);border-radius:50%;width:34px;height:34px;cursor:pointer;color:var(--gold);font-size:1rem;display:flex;align-items:center;justify-content:center;">🎙</button>
     </div>
     <p id="voice-status" style="font-size:0.6rem;color:var(--gold-dim);letter-spacing:0.1em;min-height:16px;margin-bottom:20px;"></p>
 
-    <button onclick="generateIA()" style="background:transparent;border:1px solid var(--gold);color:var(--gold-light);font-family:var(--font-body);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;padding:14px 40px;cursor:pointer;transition:all 0.25s;margin-bottom:40px;" onmouseover="this.style.background='rgba(201,168,76,0.1)'" onmouseout="this.style.background='transparent'">
+    <button onclick="generateIA()" style="background:transparent;border:1px solid var(--gold);color:var(--gold-light);font-family:var(--font-body);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;padding:14px 40px;cursor:pointer;transition:all 0.25s;margin-bottom:40px;" onmouseover="this.style.background='rgba(201,168,76,0.1)'" onmouseout="this.style.background='transparent'" data-i18n="ia.btn">
       ✦ Générer avec l'IA
     </button>
 
     <div id="ia-result" style="display:none;">
-      <div id="ia-loading" style="padding:40px;color:var(--gold-dim);font-size:0.65rem;letter-spacing:0.2em;">
-        ✦ Génération en cours...
+      <div id="ia-loading" style="padding:40px;color:var(--gold-dim);text-align:center;">
+        <div style="font-size:0.65rem;letter-spacing:0.2em;margin-bottom:16px;" data-i18n="ia.loading">✦ Génération en cours...</div>
+        <div id="ia-timer" style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:var(--gold);line-height:1;">0</div>
+        <div style="font-size:0.55rem;letter-spacing:0.15em;color:var(--white-dim);margin-top:8px;" data-i18n="ia.seconds">secondes</div>
+        <div style="width:200px;height:1px;background:rgba(201,168,76,0.15);margin:16px auto 0;position:relative;overflow:hidden;">
+          <div id="ia-progress" style="position:absolute;left:-100%;top:0;width:100%;height:100%;background:linear-gradient(to right,transparent,var(--gold),transparent);animation:iaslide 1.5s infinite;"></div>
+        </div>
       </div>
       <img id="ia-image" style="max-width:100%;border:1px solid rgba(201,168,76,0.2);display:none;" />
       <div id="ia-actions" style="display:none;margin-top:24px;gap:16px;justify-content:center;flex-wrap:wrap;">
-        <a id="ia-download" download="faire-part-ia.jpg" style="background:transparent;border:1px solid var(--gold);color:var(--gold-light);font-family:var(--font-body);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;padding:10px 24px;text-decoration:none;">⬇ Télécharger</a>
-        <a id="ia-whatsapp" href="#" target="_blank" style="background:rgba(37,211,102,0.15);border:1px solid #25d366;color:#25d366;font-family:var(--font-body);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;padding:10px 24px;text-decoration:none;">📲 Envoyer sur WhatsApp</a>
+        <a id="ia-download" download="faire-part-ia.jpg" style="background:transparent;border:1px solid var(--gold);color:var(--gold-light);font-family:var(--font-body);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;padding:10px 24px;text-decoration:none;" data-i18n="ia.download">⬇ Télécharger</a>
+        <a id="ia-whatsapp" href="#" target="_blank" style="background:rgba(37,211,102,0.15);border:1px solid #25d366;color:#25d366;font-family:var(--font-body);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;padding:10px 24px;text-decoration:none;" data-i18n="ia.whatsapp">📲 Envoyer sur WhatsApp</a>
       </div>
     </div>
   </div>
@@ -1313,9 +1366,14 @@ function generateIA() {
 
   document.getElementById('ia-result').style.display = 'block';
   document.getElementById('ia-loading').style.display = 'block';
-  document.getElementById('ia-loading').innerHTML = '✦ Génération en cours...';
   document.getElementById('ia-image').style.display = 'none';
   document.getElementById('ia-actions').style.display = 'none';
+  var iaSeconds = 0;
+  document.getElementById('ia-timer').innerHTML = '0';
+  var iaInterval = setInterval(function() {
+    iaSeconds++;
+    document.getElementById('ia-timer').innerHTML = iaSeconds;
+  }, 1000);
 
   fetch('/api/generate', {
     method: 'POST',
@@ -1328,6 +1386,7 @@ function generateIA() {
       var imgUrl = data.url;
       var img = document.getElementById('ia-image');
       img.onload = function() {
+        clearInterval(iaInterval);
         document.getElementById('ia-loading').style.display = 'none';
         img.style.display = 'block';
         document.getElementById('ia-actions').style.display = 'flex';
@@ -1337,11 +1396,11 @@ function generateIA() {
       };
       img.src = imgUrl;
     } else {
-      document.getElementById('ia-loading').innerHTML = '⚠ Erreur : ' + (data.error || 'Réessayez.');
+      clearInterval(iaInterval); document.getElementById('ia-loading').innerHTML = '⚠ Erreur : ' + (data.error || 'Réessayez.');
     }
   })
   .catch(function() {
-    document.getElementById('ia-loading').innerHTML = '⚠ Erreur de connexion, réessayez.';
+    clearInterval(iaInterval); document.getElementById('ia-loading').innerHTML = '⚠ Erreur de connexion, réessayez.';
   });
 }
 
@@ -1349,6 +1408,7 @@ function generateIA() {
 // ── TRANSLATIONS ──
 const i18n = {
   fr: {
+    "config.qty": "📦 Nombre de faire-parts",
     "nav.gallery": "Galerie", "nav.config": "Configurateur", "nav.contact": "Contact",
     "nav.testimonials": "Avis",
     "testi.eyebrow": "Ils nous ont fait confiance", "testi.title": "Ce que disent<br><em>nos clients</em>",
@@ -1411,9 +1471,29 @@ const i18n = {
     "contact.form.msg": "Votre demande", "contact.form.send": "Envoyer sur WhatsApp",
     "contact.form.filenote": "📎 Vous avez une photo ou un modèle à nous montrer ? Envoyez-le directement sur <a href=\"https://wa.me/33669929545\" target=\"_blank\" style=\"color:#c9a84c;text-decoration:underline;\">WhatsApp</a> ou par <a href=\"mailto:contact.dhcards@gmail.com\" style=\"color:#c9a84c;text-decoration:underline;\">email</a> en mentionnant votre nom.",
     "contact.form.filenote2": "💬 En cliquant ci-dessous, WhatsApp s'ouvre avec toutes vos informations déjà rédigées. Il ne vous reste qu'à appuyer sur Envoyer !",
-    "contact.form.confirm": "✓ WhatsApp s'est ouvert avec votre message prêt à envoyer !"
+    "contact.form.confirm": "✓ WhatsApp s'est ouvert avec votre message prêt à envoyer !",
+    "ia.eyebrow": "Intelligence Artificielle",
+    "ia.title": "Générez votre faire-part<br><em>avec l'IA</em>",
+    "ia.desc": "Décrivez le faire-part de vos rêves ou choisissez un exemple ci-dessous.",
+    "ia.textarea": "Ex: Faire-part élégant avec motifs dorés, fond noir, prénoms en calligraphie...",
+    "ia.btn": "✦ Générer avec l'IA",
+    "ia.loading": "✦ Génération en cours...",
+    "ia.seconds": "secondes",
+    "ia.download": "⬇ Télécharger",
+    "ia.whatsapp": "📲 Envoyer sur WhatsApp",
+    "ia.voice.listening": "🎙 Parlez maintenant...",
+    "ia.voice.done": "✓ Texte capturé !",
+    "ia.voice.error": "⚠ Erreur micro, réessayez.",
+    "ia.voice.unsupported": "⚠ Votre navigateur ne supporte pas la voix",
+    "ia.p1": "✦ Aquarelle florale",
+    "ia.p2": "✦ Acrylique & ruban",
+    "ia.p3": "✦ Gypsophile & cire",
+    "ia.p4": "✦ Minimaliste ivoire",
+    "ia.p5": "✦ Arabesque dorée",
+    "ia.p6": "✦ Dentelle & marine"
   },
   en: {
+    "config.qty": "📦 Number of invitations",
     "nav.gallery": "Gallery", "nav.config": "Configurator", "nav.contact": "Contact",
     "nav.testimonials": "Reviews",
     "testi.eyebrow": "Trusted by our clients", "testi.title": "What our<br><em>clients say</em>",
@@ -1476,9 +1556,29 @@ const i18n = {
     "contact.form.msg": "Your request", "contact.form.send": "Send on WhatsApp",
     "contact.form.filenote": "📎 Have a photo or model to show us? Send it directly on <a href=\"https://wa.me/33669929545\" target=\"_blank\" style=\"color:#c9a84c;text-decoration:underline;\">WhatsApp</a> or by <a href=\"mailto:contact.dhcards@gmail.com\" style=\"color:#c9a84c;text-decoration:underline;\">email</a> mentioning your name.",
     "contact.form.filenote2": "💬 Clicking below opens WhatsApp with all your details already written. You just need to hit Send!",
-    "contact.form.confirm": "✓ WhatsApp opened with your message ready to send!"
+    "contact.form.confirm": "✓ WhatsApp opened with your message ready to send!",
+    "ia.eyebrow": "Artificial Intelligence",
+    "ia.title": "Generate your invitation<br><em>with AI</em>",
+    "ia.desc": "Describe your dream wedding invitation or choose an example below.",
+    "ia.textarea": "Ex: Elegant invitation with gold patterns, black background, calligraphy names...",
+    "ia.btn": "✦ Generate with AI",
+    "ia.loading": "✦ Generating...",
+    "ia.seconds": "seconds",
+    "ia.download": "⬇ Download",
+    "ia.whatsapp": "📲 Send on WhatsApp",
+    "ia.voice.listening": "🎙 Speak now...",
+    "ia.voice.done": "✓ Text captured!",
+    "ia.voice.error": "⚠ Microphone error, try again.",
+    "ia.voice.unsupported": "⚠ Your browser does not support voice input",
+    "ia.p1": "✦ Floral watercolour",
+    "ia.p2": "✦ Acrylic & ribbon",
+    "ia.p3": "✦ Gypsophila & wax seal",
+    "ia.p4": "✦ Ivory minimalist",
+    "ia.p5": "✦ Gold arabesque",
+    "ia.p6": "✦ Lace & navy"
   },
   ar: {
+    "config.qty": "📦 عدد الدعوات",
     "nav.gallery": "المعرض", "nav.config": "المُهيِّئ", "nav.contact": "اتصل بنا",
     "nav.testimonials": "آراء العملاء",
     "testi.eyebrow": "وثق بنا عملاؤنا", "testi.title": "ماذا يقول<br><em>عملاؤنا</em>",
@@ -1541,9 +1641,29 @@ const i18n = {
     "contact.form.msg": "طلبك", "contact.form.send": "إرسال عبر واتساب",
     "contact.form.filenote": "📎 لديك صورة أو نموذج تريد مشاركته؟ أرسله مباشرة عبر <a href=\"https://wa.me/33669929545\" target=\"_blank\" style=\"color:#c9a84c;text-decoration:underline;\">واتساب</a> أو عبر <a href=\"mailto:contact.dhcards@gmail.com\" style=\"color:#c9a84c;text-decoration:underline;\">البريد الإلكتروني</a> مع ذكر اسمكم.",
     "contact.form.filenote2": "💬 بالضغط أدناه، سيُفتح واتساب وجميع معلوماتك جاهزة بالفعل. كل ما عليك هو الضغط على إرسال!",
-    "contact.form.confirm": "✓ تم فتح واتساب ورسالتك جاهزة للإرسال!"
+    "contact.form.confirm": "✓ تم فتح واتساب ورسالتك جاهزة للإرسال!",
+    "ia.eyebrow": "الذكاء الاصطناعي",
+    "ia.title": "أنشئ دعوتك<br><em>بالذكاء الاصطناعي</em>",
+    "ia.desc": "صف بطاقة الدعوة التي تحلم بها أو اختر مثالاً من الأمثلة أدناه.",
+    "ia.textarea": "مثال: دعوة أنيقة بنقوش ذهبية، خلفية داكنة، أسماء بالخط العربي...",
+    "ia.btn": "✦ إنشاء بالذكاء الاصطناعي",
+    "ia.loading": "✦ جارٍ الإنشاء...",
+    "ia.seconds": "ثانية",
+    "ia.download": "⬇ تحميل",
+    "ia.whatsapp": "📲 إرسال عبر واتساب",
+    "ia.voice.listening": "🎙 تحدث الآن...",
+    "ia.voice.done": "✓ تم التقاط النص!",
+    "ia.voice.error": "⚠ خطأ في الميكروفون، حاول مجدداً.",
+    "ia.voice.unsupported": "⚠ المتصفح لا يدعم الإدخال الصوتي",
+    "ia.p1": "✦ ألوان مائية زهرية",
+    "ia.p2": "✦ أكريليك وشريط",
+    "ia.p3": "✦ أزهار وختم شمع",
+    "ia.p4": "✦ بساطة عاجية",
+    "ia.p5": "✦ زخرفة ذهبية",
+    "ia.p6": "✦ دانتيل وأزرق"
   },
   tr: {
+    "config.qty": "📦 Davetiye adedi",
     "nav.gallery": "Galeri", "nav.config": "Yapılandırıcı", "nav.contact": "İletişim",
     "nav.testimonials": "Yorumlar",
     "testi.eyebrow": "Bize güvendiler", "testi.title": "Müşterilerimiz<br><em>ne diyor</em>",
@@ -1606,7 +1726,26 @@ const i18n = {
     "contact.form.msg": "Talebiniz", "contact.form.send": "WhatsApp'tan gönder",
     "contact.form.filenote": "📎 Bize göstermek istediğiniz bir fotoğraf veya model mi var? Doğrudan <a href=\"https://wa.me/33669929545\" target=\"_blank\" style=\"color:#c9a84c;text-decoration:underline;\">WhatsApp</a> üzerinden veya <a href=\"mailto:contact.dhcards@gmail.com\" style=\"color:#c9a84c;text-decoration:underline;\">e-posta</a> ile adınızı belirterek gönderin.",
     "contact.form.filenote2": "💬 Aşağıya tıkladığınızda WhatsApp tüm bilgileriniz hazır şekilde açılır. Yapmanız gereken tek şey Gönder'e basmak!",
-    "contact.form.confirm": "✓ WhatsApp mesajınız gönderilmeye hazır şekilde açıldı!"
+    "contact.form.confirm": "✓ WhatsApp mesajınız gönderilmeye hazır şekilde açıldı!",
+    "ia.eyebrow": "Yapay Zeka",
+    "ia.title": "Davetiyenizi oluşturun<br><em>yapay zeka ile</em>",
+    "ia.desc": "Hayalinizdeki davetiyeyi tarif edin veya aşağıdan bir örnek seçin.",
+    "ia.textarea": "Örn: Altın desenli, siyah arka planlı, kaligrafi isimli şık davetiye...",
+    "ia.btn": "✦ Yapay Zeka ile Oluştur",
+    "ia.loading": "✦ Oluşturuluyor...",
+    "ia.seconds": "saniye",
+    "ia.download": "⬇ İndir",
+    "ia.whatsapp": "📲 WhatsApp ile Gönder",
+    "ia.voice.listening": "🎙 Şimdi konuşun...",
+    "ia.voice.done": "✓ Metin alındı!",
+    "ia.voice.error": "⚠ Mikrofon hatası, tekrar deneyin.",
+    "ia.voice.unsupported": "⚠ Tarayıcınız ses girişini desteklemiyor",
+    "ia.p1": "✦ Suluboya çiçek",
+    "ia.p2": "✦ Akrilik & kurdele",
+    "ia.p3": "✦ Çiçek & mum mühür",
+    "ia.p4": "✦ Fildişi minimalist",
+    "ia.p5": "✦ Altın arabesk",
+    "ia.p6": "✦ Dantel & lacivert"
   }
 };
 
