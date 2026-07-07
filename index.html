@@ -1227,17 +1227,9 @@
       </select>
     </div>
 
-    <!-- Upload faire-part de référence -->
-    <div class="config-field" style="margin-bottom:8px;">
-      <label class="config-label">📎 Faire-part souhaité / référence (optionnel)</label>
-      <div id="ref-upload-zone" onclick="document.getElementById('ref-file-input').click()" style="border:1px dashed rgba(201,168,76,0.3);padding:20px;cursor:pointer;text-align:center;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.3)'">
-        <input type="file" id="ref-file-input" accept="image/*" style="display:none;" onchange="handleRefUpload(event)" />
-        <div id="ref-preview" style="display:none;margin-bottom:10px;">
-          <img id="ref-img" style="max-height:150px;max-width:100%;border:1px solid rgba(201,168,76,0.2);" />
-        </div>
-        <p id="ref-upload-text" style="font-size:0.62rem;color:var(--white-dim);margin:0;">📸 Cliquez pour ajouter une photo du faire-part souhaité</p>
-        <p style="font-size:0.55rem;color:var(--gold-dim);margin:6px 0 0;">Ajoutez une photo du style que vous souhaitez — elle sera transmise avec votre demande</p>
-      </div>
+    <!-- Info photo référence -->
+    <div style="background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.2);padding:14px 16px;margin-bottom:16px;">
+      <p style="font-size:0.62rem;color:var(--white-dim);margin:0;line-height:1.8;">📎 <strong style="color:var(--gold-dim);">Faire-part de référence</strong> — Après avoir envoyé votre message sur WhatsApp, joignez directement une photo du style souhaité dans la conversation.</p>
     </div>
 
     <div style="text-align:center">
@@ -1884,20 +1876,6 @@ function downloadPreview() {
     btn.innerHTML = originalHTML;
     btn.disabled = false;
   });
-}
-
-function handleRefUpload(event) {
-  var file = event.target.files[0];
-  if (!file) return;
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    window.refImageData = e.target.result;
-    document.getElementById('ref-img').src = e.target.result;
-    document.getElementById('ref-preview').style.display = 'block';
-    document.getElementById('ref-upload-text').textContent = '✓ ' + file.name;
-    document.getElementById('ref-upload-text').style.color = 'var(--gold)';
-  };
-  reader.readAsDataURL(file);
 }
 
 function sendContact() {
