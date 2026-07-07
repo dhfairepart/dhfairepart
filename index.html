@@ -1197,9 +1197,24 @@
     <span class="section-eyebrow">Intelligence Artificielle</span>
     <h2 class="section-title">Générez votre faire-part<br><em>avec l'IA</em></h2>
     <div class="gold-divider"></div>
-    <p style="font-size:0.78rem;color:var(--white-dim);line-height:1.8;margin-bottom:48px;">Décrivez le faire-part de vos rêves en quelques mots et notre IA le génère en quelques secondes.</p>
+    <p style="font-size:0.78rem;color:var(--white-dim);line-height:1.8;margin-bottom:32px;">Décrivez le faire-part de vos rêves ou choisissez un exemple ci-dessous.</p>
 
-    <textarea id="ia-prompt" placeholder="Ex: Faire-part de mariage élégant avec des motifs dorés et floraux, fond noir, prénoms Yasmine &amp; Ismaël en calligraphie..." style="width:100%;min-height:120px;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.3);color:var(--white);font-family:var(--font-body);font-size:0.75rem;line-height:1.8;padding:16px;resize:vertical;outline:none;box-sizing:border-box;margin-bottom:24px;"></textarea>
+    <!-- Exemples de prompts -->
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:24px;">
+      <button onclick="setPrompt(this)" data-prompt="Faire-part de mariage élégant sur fond noir, motifs dorés et floraux, prénoms Yasmine & Ismaël en calligraphie dorée" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;text-align:left;">✦ Oriental doré</button>
+      <button onclick="setPrompt(this)" data-prompt="Faire-part romantique avec dentelle blanche sur fond ivoire, roses en aquarelle, prénoms en script élégant" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;text-align:left;">✦ Dentelle romantique</button>
+      <button onclick="setPrompt(this)" data-prompt="Faire-part luxueux style boîte coffret, velours bordeaux, dorures et sceaux dorés, très haut de gamme" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;text-align:left;">✦ Coffret luxe</button>
+      <button onclick="setPrompt(this)" data-prompt="Faire-part moderne minimaliste, fond blanc, typographie fine noire et or, lignes géométriques épurées" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;text-align:left;">✦ Minimaliste moderne</button>
+      <button onclick="setPrompt(this)" data-prompt="Faire-part avec motifs henné traditionnels, couleurs or et rouge, style oriental marocain" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;text-align:left;">✦ Henné traditionnel</button>
+      <button onclick="setPrompt(this)" data-prompt="Faire-part champêtre avec fleurs sauvages pressées, fond kraft, ficelle et cire à cacheter" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--white-dim);font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.1em;padding:8px 14px;cursor:pointer;text-align:left;">✦ Champêtre nature</button>
+    </div>
+
+    <!-- Zone de texte + micro -->
+    <div style="position:relative;margin-bottom:24px;">
+      <textarea id="ia-prompt" placeholder="Ex: Faire-part élégant avec motifs dorés, fond noir, prénoms Yasmine & Ismaël en calligraphie..." style="width:100%;min-height:120px;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.3);color:var(--white);font-family:var(--font-body);font-size:0.75rem;line-height:1.8;padding:16px 50px 16px 16px;resize:vertical;outline:none;box-sizing:border-box;"></textarea>
+      <button id="mic-btn" onclick="startVoice()" title="Dicter votre description" style="position:absolute;right:12px;top:12px;background:none;border:1px solid rgba(201,168,76,0.3);border-radius:50%;width:34px;height:34px;cursor:pointer;color:var(--gold);font-size:1rem;display:flex;align-items:center;justify-content:center;">🎙</button>
+    </div>
+    <p id="voice-status" style="font-size:0.6rem;color:var(--gold-dim);letter-spacing:0.1em;min-height:16px;margin-bottom:20px;"></p>
 
     <button onclick="generateIA()" style="background:transparent;border:1px solid var(--gold);color:var(--gold-light);font-family:var(--font-body);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;padding:14px 40px;cursor:pointer;transition:all 0.25s;margin-bottom:40px;" onmouseover="this.style.background='rgba(201,168,76,0.1)'" onmouseout="this.style.background='transparent'">
       ✦ Générer avec l'IA
@@ -1244,6 +1259,48 @@ function setColor(btn, color) {
   btn.style.borderColor = 'var(--gold)';
   btn.style.color = 'var(--gold-light)';
   currentColor = color;
+}
+
+function setPrompt(btn) {
+  document.getElementById('ia-prompt').value = btn.getAttribute('data-prompt');
+  document.querySelectorAll('[data-prompt]').forEach(function(b) {
+    b.style.borderColor = 'rgba(201,168,76,0.3)';
+    b.style.color = 'var(--white-dim)';
+  });
+  btn.style.borderColor = 'var(--gold)';
+  btn.style.color = 'var(--gold-light)';
+}
+
+function startVoice() {
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    document.getElementById('voice-status').innerHTML = '⚠ Votre navigateur ne supporte pas la voix';
+    return;
+  }
+  var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var recognition = new SpeechRecognition();
+  recognition.lang = 'fr-FR';
+  recognition.interimResults = false;
+  document.getElementById('voice-status').innerHTML = '🎙 Parlez maintenant...';
+  document.getElementById('mic-btn').style.borderColor = '#25d366';
+  document.getElementById('mic-btn').style.color = '#25d366';
+  recognition.onresult = function(e) {
+    var text = e.results[0][0].transcript;
+    document.getElementById('ia-prompt').value = text;
+    document.getElementById('voice-status').innerHTML = '✓ Texte capturé !';
+    document.getElementById('mic-btn').style.borderColor = 'rgba(201,168,76,0.3)';
+    document.getElementById('mic-btn').style.color = 'var(--gold)';
+  };
+  recognition.onerror = function() {
+    document.getElementById('voice-status').innerHTML = '⚠ Erreur micro, réessayez.';
+    document.getElementById('mic-btn').style.borderColor = 'rgba(201,168,76,0.3)';
+    document.getElementById('mic-btn').style.color = 'var(--gold)';
+  };
+  recognition.onend = function() {
+    if (document.getElementById('voice-status').innerHTML === '🎙 Parlez maintenant...') {
+      document.getElementById('voice-status').innerHTML = '';
+    }
+  };
+  recognition.start();
 }
 
 function generateIA() {
