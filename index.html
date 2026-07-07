@@ -1100,7 +1100,7 @@
       </div>
       <input class="config-input" id="civil-rue" type="text" data-i18n-placeholder="config.rue.ph" placeholder="Numéro et nom de rue" oninput="updatePreview()" style="margin-bottom:8px;" />
       <div style="display:grid;grid-template-columns:minmax(90px,120px) 1fr;gap:10px;">
-        <input class="config-input" id="civil-cp" type="text" data-i18n-placeholder="config.cp.ph" placeholder="75000" oninput="updatePreview()" style="width:100%;box-sizing:border-box;" />
+        <input class="config-input" id="civil-cp" type="text" data-i18n-placeholder="config.cp.ph" placeholder="75000" maxlength="5" oninput="fetchVille(this.value, 'civil-ville'); updatePreview();" style="width:100%;box-sizing:border-box;" />
         <input class="config-input" id="civil-ville" type="text" data-i18n-placeholder="config.ville.ph" placeholder="Paris" oninput="updatePreview()" style="width:100%;box-sizing:border-box;" />
       </div>
     </div>
@@ -1117,7 +1117,7 @@
       </div>
       <input class="config-input" id="reception-rue" type="text" data-i18n-placeholder="config.rue.ph" placeholder="Numéro et nom de rue" oninput="updatePreview()" style="margin-bottom:8px;" />
       <div style="display:grid;grid-template-columns:minmax(90px,120px) 1fr;gap:10px;">
-        <input class="config-input" id="reception-cp" type="text" data-i18n-placeholder="config.cp.ph" placeholder="75000" oninput="updatePreview()" style="width:100%;box-sizing:border-box;" />
+        <input class="config-input" id="reception-cp" type="text" data-i18n-placeholder="config.cp.ph" placeholder="75000" maxlength="5" oninput="fetchVille(this.value, 'reception-ville'); updatePreview();" style="width:100%;box-sizing:border-box;" />
         <input class="config-input" id="reception-ville" type="text" data-i18n-placeholder="config.ville.ph" placeholder="Paris" oninput="updatePreview()" style="width:100%;box-sizing:border-box;" />
       </div>
     </div>
@@ -1312,6 +1312,20 @@ function setColor(btn, color) {
   btn.style.borderColor = 'var(--gold)';
   btn.style.color = 'var(--gold-light)';
   currentColor = color;
+}
+
+function fetchVille(cp, targetId) {
+  if (cp.length === 5) {
+    fetch('https://geo.api.gouv.fr/communes?codePostal=' + cp + '&fields=nom&format=json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.length > 0) {
+          document.getElementById(targetId).value = data[0].nom;
+          updatePreview();
+        }
+      })
+      .catch(function() {});
+  }
 }
 
 function setPrompt(btn) {
@@ -1818,13 +1832,13 @@ function updatePreview() {
   const cRue = document.getElementById('civil-rue').value || '';
   const cCp = document.getElementById('civil-cp').value || '';
   const cVille = document.getElementById('civil-ville').value || '';
-  const cA = [cRue, [cCp, cVille].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+  const cA = [cRue, [cCp, cVille].filter(Boolean).join(' ')].filter(Boolean).join('<br>');
   const rH = formatHeure(document.getElementById('reception-heure').value);
   const sN = document.getElementById('salle-nom').value || (i18n[currentLang] && i18n[currentLang]['preview.reception']) || 'RÉCEPTION';
   const rRue = document.getElementById('reception-rue').value || '';
   const rCp = document.getElementById('reception-cp').value || '';
   const rVille = document.getElementById('reception-ville').value || '';
-  const rA = [rRue, [rCp, rVille].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+  const rA = [rRue, [rCp, rVille].filter(Boolean).join(' ')].filter(Boolean).join('<br>');
   const basmala = document.getElementById('basmala').checked;
 
   // Basmala
