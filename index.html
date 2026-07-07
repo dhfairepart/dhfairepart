@@ -1898,7 +1898,8 @@ function sendContact() {
     date: getVal('wdate'),
     civilHeure: formatHeureWA(getVal('civil-heure')), civilLieu: getVal('civil-lieu'), civilAdresse: combineAdresse('civil-rue','civil-cp','civil-ville'),
     salleNom: getVal('salle-nom'), recHeure: formatHeureWA(getVal('reception-heure')), recAdresse: combineAdresse('reception-rue','reception-cp','reception-ville'),
-    basmala: document.getElementById('basmala') ? document.getElementById('basmala').checked : false
+    basmala: document.getElementById('basmala') ? document.getElementById('basmala').checked : false,
+    qty: document.getElementById('config-qty') ? document.getElementById('config-qty').value : '—'
   };
 
   const waMessage =
@@ -1918,6 +1919,7 @@ Famille 1 : ${cf.famille1 || '—'}
 Famille 2 : ${cf.famille2 || '—'}
 Prénom marié(e) 1 : ${cf.name1 || '—'}
 Prénom marié(e) 2 : ${cf.name2 || '—'}
+Nombre de faire-parts : ${cf.qty || '—'}
 Date du mariage : ${cf.date || '—'}
 Mariage civil : ${cf.civilHeure || '—'} — ${cf.civilLieu || '—'}
 Adresse civil : ${cf.civilAdresse || '—'}
