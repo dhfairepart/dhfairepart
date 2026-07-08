@@ -941,6 +941,9 @@
     0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(201,168,76,0.4); }
     50% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(201,168,76,0); }
   }
+  @media (max-width: 768px) {
+      .payment-grid { grid-template-columns: 1fr !important; }
+    }
   </style>
 </head>
 <body>
@@ -969,7 +972,7 @@
     </li>
     <li><a href="#testimonials" data-i18n="nav.testimonials">Avis</a></li>
     <li><a href="#configurator" data-i18n="nav.config">Configurateur</a></li>
-    <li><a href="#paiement">Paiement</a></li>
+    <li><a href="#paiement" onclick="document.getElementById('paiement').scrollIntoView({behavior:'smooth'});return false;">Paiement</a></li>
     <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
   </ul>
   <div class="lang-switcher">
@@ -2028,42 +2031,8 @@ function hideCat() {
 </script>
 <!-- CONTACT -->
 <section id="contact" style="display:block;visibility:visible;opacity:1;min-height:400px;">
+<section id="contact" style="display:block;visibility:visible;opacity:1;min-height:400px;">
   <div class="contact-wrapper" style="display:grid;opacity:1;visibility:visible;">
-    <div>
-      <span class="section-eyebrow" data-i18n="contact.eyebrow">Nous contacter</span>
-      <h2 class="section-title" data-i18n="contact.title">Commençons<br><em>votre histoire</em></h2>
-      <div class="gold-divider"></div>
-      <div class="contact-info">
-        <div class="contact-item">
-          <span class="contact-item-label" data-i18n="contact.email">Email</span>
-          <a href="mailto:contact.dhcards@gmail.com" class="contact-item-value">contact.dhcards@gmail.com</a>
-        </div>
-        <div class="contact-item">
-          <span class="contact-item-label">Instagram</span>
-          <a href="https://instagram.com/dh_fairepart" target="_blank" class="contact-item-value">@dh_fairepart</a>
-        </div>
-        <div class="contact-item">
-          <span class="contact-item-label">TikTok</span>
-          <a href="https://tiktok.com/@dh_fairepart" target="_blank" class="contact-item-value">@Dh_fairepart</a>
-        </div>
-        <div class="contact-item">
-          <span class="contact-item-label" data-i18n="contact.shipping">Livraison</span>
-          <span class="contact-item-value" style="cursor:default" data-i18n="contact.shipping.value">Europe & International 🌍</span>
-        </div>
-      </div>
-
-      <div id="paiement" style="margin-top:32px;padding-top:28px;border-top:1px solid rgba(201,168,76,0.15);">
-        <span class="contact-item-label" style="display:block;margin-bottom:14px;" data-i18n="contact.payment">Moyen de paiement</span>
-        <a href="https://www.paypal.me/doganito" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#ffffff;color:#003087;padding:12px 24px;text-decoration:none;font-weight:700;font-size:0.85rem;border-radius:4px;">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="#003087"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.153-.04.232-.866 4.45-3.5 6.713-9.135 6.713H9.41c-.524 0-.967.382-1.049.9l-1.12 7.107-.318 2.013a.566.566 0 0 0 .559.654h3.852c.524 0 .967-.382 1.05-.901l.043-.227.812-5.151.052-.285c.082-.518.526-.9 1.05-.9h.66c4.27 0 7.616-1.735 8.594-6.752.408-2.094.197-3.842-.882-5.072a4.165 4.165 0 0 0-1.198-.91z"/></svg>
-          <span data-i18n="contact.payment.btn">Payer avec PayPal</span>
-        </a>
-        <p style="font-size:0.65rem;color:var(--white-dim);margin-top:10px;line-height:1.6;" data-i18n="contact.payment.note">
-          Carte bancaire acceptée — sans compte PayPal nécessaire.
-        </p>
-      </div>
-    </div>
-
     <div class="contact-form">
       <p class="contact-note" data-i18n="contact.note">
         Envoyez-nous votre demande et nous vous répondons sous 24h avec un devis personnalisé gratuit.
@@ -2090,62 +2059,107 @@ function hideCat() {
         ✓ WhatsApp s'ouvre avec votre message prêt à envoyer !
       </div>
 
-      <!-- Stripe Payment Link -->
-      <div style="margin-top:32px;padding-top:28px;border-top:1px solid rgba(201,168,76,0.15);">
-        
-        <!-- Header -->
-        <div style="text-align:center;margin-bottom:20px;">
-          <span style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);">— Paiement en ligne sécurisé —</span>
-        </div>
+    
+    </div>
+  </div>
+</section>
 
-        <!-- Carte avec gradient -->
-        <div style="background:linear-gradient(135deg,rgba(99,91,255,0.12),rgba(99,91,255,0.04));border:1px solid rgba(99,91,255,0.3);padding:28px;position:relative;overflow:hidden;">
-          
-          <!-- Barre décorative top -->
-          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,#635BFF,#a78bfa,#635BFF);"></div>
+<!-- PAIEMENT -->
+<section id="paiement" style="padding:60px 48px;background:var(--black-soft);">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:40px;">
+      <h2 class="section-title">Paiement en ligne<br><em>100% sécurisé</em></h2>
+      <div class="gold-divider"></div>
+      <p style="font-size:0.75rem;color:var(--white-dim);line-height:1.8;margin-top:16px;">Choisissez votre moyen de paiement préféré — transactions cryptées SSL 256 bits.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
 
-          <!-- Logo Stripe -->
-          <div style="display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
-            <div style="background:#635BFF;padding:8px 20px;border-radius:4px;">
-              <span style="color:#fff;font-weight:800;font-size:1.1rem;letter-spacing:0.05em;font-family:sans-serif;">stripe</span>
-            </div>
-          </div>
-
-          <!-- Cartes acceptées -->
-          <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
-            <span style="font-size:0.52rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--white-dim);">Cartes acceptées :</span>
-            <span style="background:#fff;color:#1a1f71;font-size:0.6rem;font-weight:800;padding:4px 10px;border-radius:4px;letter-spacing:0.05em;">VISA</span>
-            <span style="background:#fff;color:#eb001b;font-size:0.6rem;font-weight:800;padding:4px 10px;border-radius:4px;letter-spacing:0.05em;">MC</span>
-            <span style="background:#fff;color:#006FCF;font-size:0.6rem;font-weight:800;padding:4px 10px;border-radius:4px;letter-spacing:0.05em;">AMEX</span>
-          </div>
-
-          <!-- Bouton payer -->
-          <a href="https://buy.stripe.com/test_14A28t4Z17oIcbOgzP6Zy01" target="_blank" style="background:linear-gradient(135deg,#635BFF,#7B73FF);color:#fff;font-family:var(--font-body);font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;padding:16px 24px;display:flex;align-items:center;justify-content:center;gap:12px;text-decoration:none;width:100%;box-sizing:border-box;transition:opacity 0.2s;box-shadow:0 4px 20px rgba(99,91,255,0.3);" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-            Payer maintenant
-          </a>
-
-          <!-- Sécurité -->
-          <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;">
-            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <span style="font-size:0.55rem;color:rgba(255,255,255,0.5);letter-spacing:0.1em;">TRANSACTIONS CRYPTÉES SSL 256 BITS</span>
+      <!-- STRIPE -->
+      <div style="background:linear-gradient(135deg,rgba(99,91,255,0.12),rgba(99,91,255,0.04));border:1px solid rgba(99,91,255,0.3);padding:28px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,#635BFF,#a78bfa,#635BFF);"></div>
+        <div style="display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+          <div style="background:#635BFF;padding:8px 20px;border-radius:4px;">
+            <span style="color:#fff;font-weight:800;font-size:1.1rem;letter-spacing:0.05em;font-family:sans-serif;">stripe</span>
           </div>
         </div>
+        <div style="display:flex;gap:8px;margin-bottom:20px;align-items:center;justify-content:center;flex-wrap:wrap;">
+          <span style="background:#fff;color:#1a1f71;font-size:0.55rem;font-weight:800;padding:4px 10px;">VISA</span>
+          <span style="background:#fff;color:#eb001b;font-size:0.55rem;font-weight:800;padding:4px 10px;">MC</span>
+          <span style="background:#fff;color:#006FCF;font-size:0.55rem;font-weight:800;padding:4px 10px;">AMEX</span>
+        </div>
+        <a href="https://buy.stripe.com/test_14A28t4Z17oIcbOgzP6Zy01" target="_blank" style="background:linear-gradient(135deg,#635BFF,#7B73FF);color:#fff;font-family:var(--font-body);font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;width:100%;box-sizing:border-box;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Payer maintenant
+        </a>
+        <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span style="font-size:0.52rem;color:rgba(255,255,255,0.4);letter-spacing:0.1em;">SSL 256 BITS</span>
+        </div>
+      </div>
 
-        <!-- PayPal -->
-        <div style="margin-top:16px;text-align:center;">
-          <p style="font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--white-dim);margin-bottom:12px;">— ou payer avec —</p>
-          <a href="https://www.paypal.me/doganito" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#ffffff;color:#003087;padding:12px 28px;text-decoration:none;font-weight:700;font-size:0.85rem;border-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,0.3);">
+      <!-- PAYPAL -->
+      <div style="background:linear-gradient(135deg,rgba(0,48,135,0.15),rgba(0,112,224,0.08));border:1px solid rgba(0,112,224,0.3);padding:28px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,#003087,#009cde,#003087);"></div>
+        <div style="display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+          <div style="background:#fff;padding:8px 20px;border-radius:4px;display:inline-flex;align-items:center;gap:8px;">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="#003087"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.153-.04.232-.866 4.45-3.5 6.713-9.135 6.713H9.41c-.524 0-.967.382-1.049.9l-1.12 7.107-.318 2.013a.566.566 0 0 0 .559.654h3.852c.524 0 .967-.382 1.05-.901l.043-.227.812-5.151.052-.285c.082-.518.526-.9 1.05-.9h.66c4.27 0 7.616-1.735 8.594-6.752.408-2.094.197-3.842-.882-5.072a4.165 4.165 0 0 0-1.198-.91z"/></svg>
-            Payer avec PayPal
-          </a>
-          <p style="font-size:0.58rem;color:var(--white-dim);margin-top:8px;line-height:1.6;">Carte bancaire acceptée — sans compte PayPal nécessaire.</p>
+            <span style="color:#003087;font-weight:800;font-size:1.1rem;font-family:sans-serif;">PayPal</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:20px;align-items:center;justify-content:center;">
+          <span style="font-size:0.55rem;color:var(--white-dim);letter-spacing:0.1em;">Carte bancaire acceptée sans compte</span>
+        </div>
+        <a href="https://www.paypal.me/doganito" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#003087,#009cde);color:#fff;font-family:var(--font-body);font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;width:100%;box-sizing:border-box;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="#fff"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.153-.04.232-.866 4.45-3.5 6.713-9.135 6.713H9.41c-.524 0-.967.382-1.049.9l-1.12 7.107-.318 2.013a.566.566 0 0 0 .559.654h3.852c.524 0 .967-.382 1.05-.901l.043-.227.812-5.151.052-.285c.082-.518.526-.9 1.05-.9h.66c4.27 0 7.616-1.735 8.594-6.752.408-2.094.197-3.842-.882-5.072a4.165 4.165 0 0 0-1.198-.91z"/></svg>
+          Payer avec PayPal
+        </a>
+        <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span style="font-size:0.52rem;color:rgba(255,255,255,0.4);letter-spacing:0.1em;">PAIEMENT SÉCURISÉ</span>
         </div>
       </div>
 
     </div>
   </div>
 </section>
+
+<section style="padding:60px 48px;background:var(--black);">
+  <div style="max-width:800px;margin:0 auto;">
+    <div class="contact-wrapper" style="display:grid;">
+      <div>
+        <div>
+      <span class="section-eyebrow" data-i18n="contact.eyebrow">Nous contacter</span>
+      <h2 class="section-title" data-i18n="contact.title">Commençons<br><em>votre histoire</em></h2>
+      <div class="gold-divider"></div>
+      <div class="contact-info">
+        <div class="contact-item">
+          <span class="contact-item-label" data-i18n="contact.email">Email</span>
+          <a href="mailto:contact.dhcards@gmail.com" class="contact-item-value">contact.dhcards@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Instagram</span>
+          <a href="https://instagram.com/dh_fairepart" target="_blank" class="contact-item-value">@dh_fairepart</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">TikTok</span>
+          <a href="https://tiktok.com/@dh_fairepart" target="_blank" class="contact-item-value">@Dh_fairepart</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label" data-i18n="contact.shipping">Livraison</span>
+          <span class="contact-item-value" style="cursor:default" data-i18n="contact.shipping.value">Europe & International 🌍</span>
+        </div>
+      </div>
+
+    </div>
+
+    
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 
 <!-- WHATSAPP FLOAT BUTTON -->
 <a href="https://wa.me/33669929545" target="_blank" rel="noopener" id="whatsapp-float" aria-label="Contactez-nous sur WhatsApp">
