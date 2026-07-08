@@ -864,7 +864,7 @@
       .nav-links { display: none; }
       .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; background: rgba(10,10,10,0.98); padding: 80px 24px 32px; gap: 0; z-index: 199; }
       .nav-links.open li { padding: 12px 0; border-bottom: 1px solid rgba(201,168,76,0.1); }
-      #hbg { display: flex !important; }
+      #hbg { display: flex !important; position: relative; z-index: 200; }
       section { padding: 70px 20px; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
       .config-wrapper { grid-template-columns: 1fr; gap: 16px; }
@@ -983,10 +983,10 @@
     <button class="lang-btn" onclick="setLang('ar')">AR</button>
     <button class="lang-btn" onclick="setLang('tr')">TR</button>
   </div>
-  <button onclick="document.querySelector('.nav-links').classList.toggle('open')" style="display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;" id="hbg">
-    <span style="display:block;width:22px;height:1.5px;background:#c9a84c;"></span>
-    <span style="display:block;width:22px;height:1.5px;background:#c9a84c;"></span>
-    <span style="display:block;width:22px;height:1.5px;background:#c9a84c;"></span>
+  <button onclick="toggleMobileNav()" style="display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;" id="hbg">
+    <span style="display:block;width:22px;height:1.5px;background:#c9a84c;transition:transform 0.25s ease, opacity 0.25s ease;" id="hbg-1"></span>
+    <span style="display:block;width:22px;height:1.5px;background:#c9a84c;transition:transform 0.25s ease, opacity 0.25s ease;" id="hbg-2"></span>
+    <span style="display:block;width:22px;height:1.5px;background:#c9a84c;transition:transform 0.25s ease, opacity 0.25s ease;" id="hbg-3"></span>
   </button>
 </nav>
 
@@ -1944,6 +1944,45 @@ Adresse réception : ${cf.recAdresse || '—'}
 // ── NAVBAR SCROLL ──
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── MOBILE NAV MENU (open / close) ──
+function toggleMobileNav() {
+  const menu = document.querySelector('.nav-links');
+  const isOpen = menu.classList.toggle('open');
+  const b1 = document.getElementById('hbg-1');
+  const b2 = document.getElementById('hbg-2');
+  const b3 = document.getElementById('hbg-3');
+  if (isOpen) {
+    b1.style.transform = 'translateY(6.5px) rotate(45deg)';
+    b2.style.opacity = '0';
+    b3.style.transform = 'translateY(-6.5px) rotate(-45deg)';
+  } else {
+    b1.style.transform = 'none';
+    b2.style.opacity = '1';
+    b3.style.transform = 'none';
+  }
+}
+
+function closeMobileNav() {
+  const menu = document.querySelector('.nav-links');
+  if (!menu.classList.contains('open')) return;
+  menu.classList.remove('open');
+  const b1 = document.getElementById('hbg-1');
+  const b2 = document.getElementById('hbg-2');
+  const b3 = document.getElementById('hbg-3');
+  if (b1) b1.style.transform = 'none';
+  if (b2) b2.style.opacity = '1';
+  if (b3) b3.style.transform = 'none';
+}
+
+// Close the mobile menu automatically whenever a nav link is tapped
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    // Let the "Catégories" submenu toggle stay open without closing the main nav
+    if (link.getAttribute('onclick') && link.getAttribute('onclick').includes('toggleCats')) return;
+    closeMobileNav();
+  });
 });
 
 // ── ADJUST FOR BANNER HEIGHT (handles wrapping on mobile) ──
