@@ -942,7 +942,9 @@
     50% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(201,168,76,0); }
   }
   @media (max-width: 768px) {
-      .payment-grid { grid-template-columns: 1fr !important; }
+      .payment-grid { grid-template-columns: 1fr !important; max-width: 360px; margin: 0 auto; }
+      .payment-grid a { font-size: 0.75rem !important; padding: 16px !important; }
+      .payment-grid span[style*="font-size:0.55rem"] { font-size: 0.65rem !important; }
     }
   </style>
 </head>
@@ -2072,7 +2074,7 @@ function hideCat() {
       <div class="gold-divider"></div>
       <p style="font-size:0.75rem;color:var(--white-dim);line-height:1.8;margin-top:16px;">Choisissez votre moyen de paiement préféré — transactions cryptées SSL 256 bits.</p>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+    <div class="payment-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
 
       <!-- STRIPE -->
       <div style="background:linear-gradient(135deg,rgba(99,91,255,0.12),rgba(99,91,255,0.04));border:1px solid rgba(99,91,255,0.3);padding:28px;position:relative;overflow:hidden;">
