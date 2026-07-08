@@ -434,14 +434,14 @@
     }
 
     /* ── CONFIGURATOR ── */
-    #configurator { background: var(--black); }
+    #configurator { background: var(--black); padding-top: 60px; padding-bottom: 60px; }
 
     .config-wrapper {
       max-width: 900px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      gap: 24px;
       align-items: start;
     }
 
@@ -867,7 +867,7 @@
       #hbg { display: flex !important; }
       section { padding: 70px 20px; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      .config-wrapper { grid-template-columns: 1fr; gap: 40px; }
+      .config-wrapper { grid-template-columns: 1fr; gap: 16px; }
       .config-preview { position: static; }
       .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
       .contact-wrapper > div:first-child { order: 2; }
@@ -1104,7 +1104,7 @@
 
 <!-- CONFIGURATOR -->
 <section id="configurator">
-  <div style="max-width:800px;margin:0 auto 60px;" class="fade-in">
+  <div style="max-width:800px;margin:0 auto 8px;" class="fade-in">
     <span class="section-eyebrow" data-i18n="config.eyebrow">Créez le vôtre</span>
     <h2 class="section-title" data-i18n="config.title">Votre faire-part,<br><em>personnalisé en direct</em></h2>
     <div class="gold-divider"></div>
@@ -1114,7 +1114,7 @@
   </div>
 
   <!-- CHAMPS EN HAUT -->
-  <div style="max-width:800px;margin:0 auto 60px;display:flex;flex-direction:column;gap:16px;" class="fade-in">
+  <div style="max-width:800px;margin:0 auto 8px;display:flex;flex-direction:column;gap:16px;" class="fade-in">
 
     <!-- Basmala -->
     <label style="display:flex;align-items:center;gap:12px;background:var(--black-card);border:1px solid rgba(201,168,76,0.2);padding:14px 16px;cursor:pointer;">
@@ -1250,7 +1250,7 @@
   </div>
 
   <!-- APERÇU PLEINE LARGEUR EN BAS -->
-  <div style="max-width:520px;margin:0 auto;" class="fade-in">
+  <div style="max-width:520px;margin:0 auto;margin-top:0;" class="fade-in">
     <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;text-align:center;" data-i18n="config.preview">Aperçu en direct</p>
 
     <div id="fp-preview" style="background:#fff;color:#8a6f30;padding:48px 40px;font-family:'Montserrat',sans-serif;text-align:center;border:3px solid #c9a84c;position:relative;">
